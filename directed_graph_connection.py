@@ -33,6 +33,12 @@ class FriendsGraph:
                 self.users[user].add(friend)
                 print(f"User `{user}` and User `{friend}` are now friends.")
 
+    def remove_friend(self, user: str, friend: str):
+        if self.do_users_exist(user, friend):
+            if friend in self.users[user]:
+                self.users[user].remove(friend)
+                print(f"User `{user}` and User `{friend}` are no longer friends.")
+
     def are_friends(self, user, friend):
         if not self.do_users_exist(user, friend):
             print(f"User `{user}` and/or User `{friend}` not registered.")
@@ -56,7 +62,7 @@ class FriendsGraph:
                     if n not in already_searched:
                         to_search.append(n)
 
-        print(f"User `{user}` and User `{friend}` are not friends")
+        print(f"User `{user}` and User `{friend}` are not friends.")
 
 
 if __name__ == "__main__":
