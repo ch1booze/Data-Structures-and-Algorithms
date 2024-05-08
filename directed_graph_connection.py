@@ -18,7 +18,7 @@ class FriendsGraph:
             print(f"User `{user}` and/or User `{friend}` not registered.")
             return False
 
-    def register(self, user: str):
+    def register_user(self, user: str):
         if not self.does_user_exist(user):
             self.users[user] = set()
             print(f"Created `{user}` profile.")
@@ -67,22 +67,22 @@ class FriendsGraph:
 
 if __name__ == "__main__":
     social_network = FriendsGraph()
-    social_network.register("John")
-    social_network.register("Khalid")
-    social_network.register("Catherine")
-    social_network.register("Caleb")
-    social_network.register("Nikita")
-    social_network.register("Boris")
-    social_network.register("Billy")
-    social_network.register("Eugene")
-    social_network.register("Peter")
-    social_network.register("Gina")
-    social_network.register("Bernstein")
-    social_network.register("Jonah")
-    social_network.register("Beatrice")
-    social_network.register("Dan")
-    social_network.register("Hank")
-    social_network.register("Clara")
+    social_network.register_user("John")
+    social_network.register_user("Khalid")
+    social_network.register_user("Catherine")
+    social_network.register_user("Caleb")
+    social_network.register_user("Nikita")
+    social_network.register_user("Boris")
+    social_network.register_user("Billy")
+    social_network.register_user("Eugene")
+    social_network.register_user("Peter")
+    social_network.register_user("Gina")
+    social_network.register_user("Bernstein")
+    social_network.register_user("Jonah")
+    social_network.register_user("Beatrice")
+    social_network.register_user("Dan")
+    social_network.register_user("Hank")
+    social_network.register_user("Clara")
 
     print()
 

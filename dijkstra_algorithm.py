@@ -12,3 +12,5 @@ class WeightedGraph:
 
         self.connections[src].add(dst)
         self.weights[src].add(weight)
+
+    
