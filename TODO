@@ -1,2 +1,2 @@
 ✔ Implement a directed weighted graph representation. @done(24-05-04 14:46)
-☐ Implement Dijkstra's algorithm.
+☐ Implement appropriate updating of node information in Dijkstra's algorithm.
