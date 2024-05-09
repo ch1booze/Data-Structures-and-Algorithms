@@ -1,4 +1,4 @@
-import random
+from collections import deque
 import math
 
 
@@ -60,22 +60,57 @@ class VectorGraph:
             print(f"{src} is not a source.")
 
     def get_nodes(self):
-        return list(self.connections.keys())
+        nodes = list()
+        for node_list in self.connections.values():
+            nodes += node_list
+        nodes = list(set(nodes))
+        return nodes
+
+    def get_sources(self):
+        return set(self.connections.keys())
 
 
 if __name__ == "__main__":
     vectors = VectorGraph()
-    random.seed(10)
 
-    for _ in range(20):
-        source = chr(random.randint(65, 74))
-        destination = chr(random.randint(65, 74))
-        while source == destination:
-            destination = chr(random.randint(65, 74))
-        distance = random.randint(1, 20)
-        vectors.add_edge(source, destination, distance)
+    vectors.add_edge("Book", "LP", 5)
+    vectors.add_edge("Book", "Poster", 0)
+    vectors.add_edge("LP", "Guitar", 15)
+    vectors.add_edge("LP", "Drum", 20)
+    vectors.add_edge("Poster", "Guitar", 30)
+    vectors.add_edge("Poster", "Drum", 35)
+    vectors.add_edge("Guitar", "Piano", 20)
+    vectors.add_edge("Drum", "Piano", 10)
 
     nodes = vectors.get_nodes()
-    start_node = "A"
-    end_node = "J"
-    node_distances = {node: math.inf for node in nodes if node != start_node}
+    sources = vectors.get_sources()
+    start_node = "Book"
+    end_node = "Piano"
+    dijkstra_distances = {node: math.inf for node in nodes if node != start_node}
+    dijkstra_parents = {node: None for node in nodes if node != start_node}
+    current_node = start_node
+    processed_nodes = set()
+    q = deque()
+
+    while sources.intersection(processed_nodes) != sources:
+        distances = vectors.weights[current_node]
+        connections = vectors.connections[current_node]
+
+        shortest_distance = min(distances)
+        index_for_shortest_dist = distances.index(shortest_distance)
+        node_for_shortest_dist = connections[index_for_shortest_dist]
+
+        if shortest_distance < dijkstra_distances[node_for_shortest_dist]:
+            dijkstra_distances[node_for_shortest_dist] = shortest_distance
+            dijkstra_parents[node_for_shortest_dist] = current_node
+
+        for node in connections:
+            if node in sources:
+                q.append(node)
+
+        processed_nodes.add(current_node)
+        current_node = q.pop()
+
+    print(dijkstra_distances)
+    print()
+    print(dijkstra_parents)
