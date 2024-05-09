@@ -1,3 +1,6 @@
+import random
+
+
 class VectorGraph:
     def __init__(self) -> None:
         self.connections = dict()
@@ -57,6 +60,13 @@ class VectorGraph:
 
 
 if __name__ == "__main__":
-    location_graph = LocationGraph()
-    location_graph.add_edge("Ilesha", "Ife", 200)
-    location_graph.add_edge("Ife", "Ilesha", 200)
+    vectors = VectorGraph()
+    random.seed(42)
+
+    for _ in range(15):
+        source = chr(random.randint(65, 74))
+        destination = chr(random.randint(65, 74))
+        while source == destination:
+            destination = chr(random.randint(65, 74))
+        distance = random.randint(1, 20)
+        vectors.add_edge(source, destination, distance)
