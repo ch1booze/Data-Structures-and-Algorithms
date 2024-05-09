@@ -1,4 +1,4 @@
-class LocationGraph:
+class VectorGraph:
     def __init__(self) -> None:
         self.connections = dict()
         self.weights = dict()
@@ -54,3 +54,9 @@ class LocationGraph:
 
         else:
             print(f"{src} is not a source.")
+
+
+if __name__ == "__main__":
+    location_graph = LocationGraph()
+    location_graph.add_edge("Ilesha", "Ife", 200)
+    location_graph.add_edge("Ife", "Ilesha", 200)
