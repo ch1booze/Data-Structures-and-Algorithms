@@ -1,4 +1,5 @@
 import random
+import math
 
 
 class VectorGraph:
@@ -58,15 +59,23 @@ class VectorGraph:
         else:
             print(f"{src} is not a source.")
 
+    def get_nodes(self):
+        return list(self.connections.keys())
+
 
 if __name__ == "__main__":
     vectors = VectorGraph()
-    random.seed(42)
+    random.seed(10)
 
-    for _ in range(15):
+    for _ in range(20):
         source = chr(random.randint(65, 74))
         destination = chr(random.randint(65, 74))
         while source == destination:
             destination = chr(random.randint(65, 74))
         distance = random.randint(1, 20)
         vectors.add_edge(source, destination, distance)
+
+    nodes = vectors.get_nodes()
+    start_node = "A"
+    end_node = "J"
+    node_distances = {node: math.inf for node in nodes if node != start_node}
