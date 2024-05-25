@@ -35,10 +35,10 @@ class VectorGraph:
 
         start_neighbors = self.graph[start].keys()
         for node in start_neighbors:
-            costs[node] = start
-            parents[node] = self.graph[start][node]
+            parents[node] = start
+            costs[node] = self.graph[start][node]
 
-        current_node = find_lowest_cost_node(costs)
+        current_node = find_lowest_cost_node(costs, processed)
         while current_node is not None:
             cost = costs[current_node]
             neighbors = self.graph[current_node]
@@ -51,6 +51,9 @@ class VectorGraph:
             processed.append(current_node)
             current_node = find_lowest_cost_node(costs, processed)
 
+        print(parents)
+        print(costs)
+
 
 if __name__ == "__main__":
     v = VectorGraph()
@@ -59,3 +62,5 @@ if __name__ == "__main__":
     v.add_edge("a", "fin", 1)
     v.add_edge("b", "a", 3)
     v.add_edge("b", "fin", 1)
+
+    v.dijkstra("start")
